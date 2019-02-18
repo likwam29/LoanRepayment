@@ -7,7 +7,9 @@
 # make method that will compare two loans and determine what one should
 # be payed first and down to which amount
 
-#
+# create method that will calculate total amount paid given principal, apy, years
+
+
 
 def percentageToDecimal(percentage):
     return percentage / 100
@@ -33,7 +35,7 @@ def calcInterestAccrued(principal, apy, interval):
     return principal * rate
 
 def main():
-    print("Daily interest: /n")
+    print("Tests below: /n")
 
     #monthly = calcMonthlyInterestAccrued(1000, .05)
     yearly = calcInterestAccrued(1000, 5, 2131)
