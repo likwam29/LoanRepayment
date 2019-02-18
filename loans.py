@@ -1,3 +1,6 @@
+# possible look at using ElectronJS for a frontend and develop flask backend
+# using this file as a POC
+
 # make method that will allow the user to calc monthly payments
 # required in order to pay off debt in X years
 
@@ -7,36 +10,33 @@
 #
 
 def percentageToDecimal(percentage):
-    return percentage/100
+    return percentage / 100
 
 def decimalToPercentage(decimal):
     return decimal * 100
 
-def calcDailyInterestRate(apy):
-    return apy/365
-
-def calcDailyInterestAccrued(principal, apy):
-    # take APY rate and get daily interest rate from it
-    daily_rate = calcDailyInterestRate(apy)
-    # multiply daily rate by principal
-    return principal * (1 + daily_rate)
-
-def calcMonthlyInterestRate(apy):
-    return apy/12
-
-def calcMonthlyInterestAccrued(principal, apy):
-    # take APY rate and get monthly interest rate from it
-    monthly_rate = calcMonthlyInterestRate(apy)
-    # multiply monthly rate by principal
-    return principal * (1 + monthly_rate)
-
-
+# this method will calculate how much interest will be accrued during a period
+# Range: year - daily I.E. yearly=1|daily=365
+def calcInterestAccrued(principal, apy, interval):
+    # check apy to make sure it's in decimal form and convert if needed
+    rate = apy
+    if rate >= 1.0:
+        rate = percentageToDecimal(apy)
+    # verify interval in no greater than 365, since 365 would signify Daily
+    if interval > 365:
+        # kick out an error about how daily is as far down as it goes
+        print("Interest accrued can be calculated on a daily basis at most.")
+        return
+    # calc the interest for the given interval
+    rate = rate / interval
+    # calc yearly interest total
+    return principal * rate
 
 def main():
     print("Daily interest: /n")
 
-    monthly = calcMonthlyInterestAccrued(1000, .05)
-    yearly = monthly + ((monthly - 1000) * 12)
+    #monthly = calcMonthlyInterestAccrued(1000, .05)
+    yearly = calcInterestAccrued(1000, 5, 2131)
     print(yearly)
 
 main()
