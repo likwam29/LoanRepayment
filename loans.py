@@ -1,3 +1,5 @@
+import math
+
 # possible look at using ElectronJS for a frontend and develop flask backend
 # using this file as a POC
 
@@ -9,7 +11,22 @@
 
 # create method that will calculate total amount paid given principal, apy, years
 
+"""This method will return the number of months needed to pay off a loan given
+the principal, apy, and monthly payments"""
+def calcNumberOfPayments(principal, apy, monthly_payment):
+    # check apy to make sure it's in decimal form and convert if needed
+    rate = apy
+    if rate >= 1.0:
+        rate = percentageToDecimal(apy)
+    # calc monthly create
+    monthly_rate = rate/12
 
+    numerator = math.log10(1 - monthly_rate * principal / monthly_payment) * -1
+    denominator = math.log10(1+monthly_rate)
+    return numerator / denominator
+
+def calcTotalInterestPayed(principal, monthly_payment, num_payments):
+    return 0
 
 def percentageToDecimal(percentage):
     return percentage / 100
@@ -38,7 +55,7 @@ def main():
     print("Tests below: /n")
 
     #monthly = calcMonthlyInterestAccrued(1000, .05)
-    yearly = calcInterestAccrued(1000, 5, 2131)
-    print(yearly)
+    months = calcNumberOfPayments(10000, 10, 500)
+    print(months)
 
 main()
