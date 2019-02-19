@@ -35,6 +35,8 @@ def calcTotalInterestPayed(principal, apy, monthly_payment):
     num_months = calcNumberOfPayments(principal, apy, monthly_payment)
     return monthly_payment * num_months - principal
 
+"""This method will calculate the monthly payment needed to pay off a loan
+in a given number of months"""
 def calcMonthlyPaymentForNumberOfMonths(principal, apy, months):
     # check apy to make sure it's in decimal form and convert if needed
     rate = apy
